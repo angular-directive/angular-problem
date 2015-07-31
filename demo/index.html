@@ -13,9 +13,18 @@
     <h1 id="" class="text-center" style="margin: 100px;">
       {{title}}
     </h1>
-    <button class="btn btn-success" style="margin-bottom: 15px;">查看浏览器network里的请求情况</button>
+    <button class="btn btn-success" style="margin-bottom: 15px;" ng-click="vm.open()">开启测试</button>
    <div class="content">
-     <img src="" ng-repeat="item in imgs track by $index" data-ui-lazyload="{{item}}" watch="watch"/>
+      <input ng-model="vm.oldVal" ng-if="vm.start">
+      <input ng-model="newVal" ng-if="vm.oldVal">
+   </div>
+   <div class="content">
+      <input ng-model="vm.oldVal" ng-if="vm.start">
+      <input ng-model="newVal" ng-if="vm.oldVal">
+   </div>
+   <div class="content">
+      <input ng-model="vm.oldVal" ng-show="vm.start">
+      <input ng-model="newVal" ng-show="vm.oldVal">
    </div>
   </body>
 </html>
@@ -24,16 +33,12 @@
   var app = angular.module('demo' , ['lazyload']);
   app.controller('demoCtro' , function($scope){
 
-      $scope.title = 'lazyload-directive';
+      $scope.title = 'ng-if && ng-show';
+      var  vm = $scope.vm = {};
 
-      $scope.watch = {};
-      // 图片集合
-      $scope.imgs = [];
-
-      var url = 600;
-      for(var i = 0; i< 20 ; i++ ){
-         url ++ ;
-         $scope.imgs.push('http://placekitten.com/'+url+'/300');
+      vm.open = function(){
+        vm.start = true;
       }
+
   })
 </script>
